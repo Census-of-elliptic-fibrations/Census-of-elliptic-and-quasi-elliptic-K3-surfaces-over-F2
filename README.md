@@ -23,6 +23,8 @@ Data:
 - `census.txt.gz`: the 1,397,598 elliptic K3 surfaces, one model per line as the list $[a_1,a_2,a_3,a_4,a_6]$ with $a_2 = 0$, e.g. `[0, 0, t^6, s^6*t^2, s^11*t]` (4.3 MB compressed).
 - `mini_census.txt`: a random sample of 1000 lines of the census (seed 2026), in the same format, for quick tests.
 - `mini_census.m`: the same sample as Magma objects. After `load "mini_census.m";`, `models[i]` is the $i$-th model in `P<s,t>` and `curves[i]` its generic fibre over `K<T>` $= \mathbf F_2(T)$, $T = t/s$.
+- `quasi-elliptic.txt`: 720 quasi-elliptic models ($a_1 = a_3 = 0$), one per line in the same format, e.g. `[0, 0, 0, 0, s*t^11]`. The first line is $[0,0,0,0,0]$.
+- `quasi_elliptic.m`: the same models as Magma objects. After `load "quasi_elliptic.m";`, `models[i]` is the $i$-th model and `curves[i]` its generic fibre $y^2 = x^3 + a_4x + a_6$ as a plane curve over $\mathbf F_2(T)$; it is singular in characteristic 2, so `EllipticCurve` does not apply.
 
 
 ## Method
@@ -35,7 +37,7 @@ Run `magma -b census_driver.m` from the repository root. It is tested with Magma
 
 Run `magma -b orbit-fib.m` to write the list of surfaces to `census.txt.gz`. It needs `gzip` on the path. Read the file with `zcat census.txt.gz`.
 
-Run `magma -b timing_tests.m` to time the built-in functions on the sample, or `load "mini_census.m";` in a Magma session to try functions on it by hand.
+Run `magma -b timing_tests.m` to time the built-in functions on the sample, or `load "mini_census.m";` (or `load "quasi_elliptic.m";`) in a Magma session to try functions by hand.
 
 ## Results
 

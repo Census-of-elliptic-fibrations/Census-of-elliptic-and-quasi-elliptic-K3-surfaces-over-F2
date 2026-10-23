@@ -3,7 +3,7 @@
 //     y^2 + a1*x*y + a3*y = x^3 + a2*x^2 + a4*x + a6
 // and the elliptic curve it defines over the function field of P^1.
 
-datafile := "elliptic-fib-census.txt";
+datafile := "mini_census.txt";
 
 // s and t must be defined before the file is read, so that eval understands them
 P<s,t> := PolynomialRing(GF(2), 2);      // the coefficients a_i live in Q[s,t]

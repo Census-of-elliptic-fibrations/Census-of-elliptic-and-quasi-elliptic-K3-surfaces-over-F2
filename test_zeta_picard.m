@@ -36,4 +36,4 @@ printf "%o curves checked in %o s\n", N, Cputime(start);
 
 printf "rho over F2bar: %o\n", [ <g, #[ x : x in geometric | x eq g ]> : g in Sort(SetToSequence(Seqset(geometric))) ];
 printf "rho over F2:    %o\n", [ <r, #[ x : x in arithmetic | x eq r ]> : r in Sort(SetToSequence(Seqset(arithmetic))) ];
-printf "First curve: P2 = %o\n", ZetaFunction(curves[1]);
+printf "First curve: P2 = %o\n", ZetaP2(curves[1]);

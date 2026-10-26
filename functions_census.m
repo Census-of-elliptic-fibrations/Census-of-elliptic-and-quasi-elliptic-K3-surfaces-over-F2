@@ -128,6 +128,21 @@ function LFunctionSign(E)
     return Integers() ! eps;
 end function;
 
+function ZetaSign(E)
+    // The sign of the functional equation of P2, the H^2 factor of the zeta function of
+    // the surface X with generic fibre E.  Writing b = Degree(P2) (22 for a K3),
+    //     P2(u) = eps * (q u)^b * P2(1/(q^2 u)),
+    // and eps is the leading coefficient of P2 divided by q^b.  Each inverse root q
+    // contributes -1 and all others +1, so eps = (-1)^rho(X over F_q).
+    //   Input:  E, an elliptic curve over F_q(T) (e.g. curves[i] from mini_census.m)
+    //   Output: eps, the integer 1 or -1
+    q := #BaseRing(BaseRing(E));
+    P2 := ZetaFunction(E);
+    eps := LeadingCoefficient(P2) / q^Degree(P2);
+    error if eps notin {1, -1}, "ZetaSign: leading coefficient is not +-q^b:", P2;
+    return Integers() ! eps;
+end function;
+
 function IsCyclotomicFactor(f)
     // Whether f is a cyclotomic polynomial (its roots are roots of unity).
     //   Input:  f, a monic irreducible polynomial over Q (a factor from Factorization)
@@ -159,6 +174,52 @@ function PicardNumber(E)
         arithmetic +:= 1;
     end while;
     return geometric, arithmetic;
+end function;
+
+function ArtinTateValue(E)
+    // The product #Br(X) * |disc NS(X)| for the K3 surface X with generic fibre E, both
+    // over F_q, from the Artin-Tate formula.  For a K3 surface chi(O_X) = 2, there is no
+    // Picard variety and NS(X) is torsion-free, so the formula reads
+    //     #Br(X) * |disc NS(X)| = q * lim_{u -> 1/q} P2(u) / (1 - q u)^rho,
+    // with rho = rho(X over F_q).  It holds since the Tate conjecture does.
+    //   Input:  E, an elliptic curve over F_q(T) whose surface is a K3 (e.g. curves[i])
+    //   Output: two integers,
+    //           #Br(X) * |disc NS(X)|, a positive integer
+    //           rho(X over F_q), the exponent used (as PicardNumber's second value)
+    //   Use value, rho := ArtinTateValue(E);
+    q := #BaseRing(BaseRing(E));
+    QX<X> := PolynomialRing(Rationals());
+    P := QX ! Coefficients(ZetaFunction(E));
+    rho := 0;
+    while Evaluate(P, 1/q) eq 0 do
+        P div:= 1 - q*X;
+        rho +:= 1;
+    end while;
+    value := q * Evaluate(P, 1/q);
+    error if not (IsIntegral(value) and value gt 0),
+        "ArtinTateValue: q * P2*(1/q) is not a positive integer:", value;
+    return Integers() ! value, rho;
+end function;
+
+function ArtinMazurHeight(E)
+    // The height h of the formal Brauer group of the K3 surface X with generic fibre E.
+    // The Newton polygon of P2 (q-adic valuations, v(q) = 1) has slopes 1 - 1/h (h times),
+    // 1, and 1 + 1/h (h times), so its first slope s = min_k v(a_k)/k, over the
+    // coefficients a_k of u^k, gives h = 1/(1 - s); s = 1 exactly when X is supersingular.
+    //   Input:  E, an elliptic curve over F_q(T) whose surface is a K3 (e.g. curves[i])
+    //   Output: h, an integer from 1 to 10, or Infinity() when X is supersingular
+    //           (h = 1 means X is ordinary)
+    q := #BaseRing(BaseRing(E));
+    p := Characteristic(BaseRing(BaseRing(E)));
+    e := Valuation(q, p);                                  // q = p^e
+    a := Coefficients(ZetaFunction(E));                    // a[k+1] = coefficient of u^k
+    s := Min([ Valuation(a[k+1], p) / (e*k) : k in [1..#a-1] | a[k+1] ne 0 ]);
+    if s ge 1 then
+        return Infinity();
+    end if;
+    h := 1 / (1 - s);
+    error if not (IsIntegral(h) and h le 10), "ArtinMazurHeight: unexpected first slope", s;
+    return Integers() ! h;
 end function;
 
 

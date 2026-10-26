@@ -38,6 +38,7 @@ Data:
   - `LFunctionSign` (sign of the functional equation of the L-function)
   - `HeightP2` - Artin height of the surfaces.
   - `ArtinTateWrapper` - Artin-Tate formula numerator
+  - `ArtinTateValue` and `ArtinMazurHeight` - the same two invariants computed directly from $P_2$ (the limit at $u = 1/2$ and the first Newton slope), as an independent check
 
 ## Wish list
 These are functions that would be nice to have, but are not yet implemented:

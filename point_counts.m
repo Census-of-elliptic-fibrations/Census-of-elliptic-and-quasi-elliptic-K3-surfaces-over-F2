@@ -15,6 +15,3 @@ function PointCounts(equ , n)
   L := T * Derivative(Z) / Z;
   return [ Integers() ! Coefficient(L, r) : r in [1..n] ];
 end function ;
-
-
-exit ;

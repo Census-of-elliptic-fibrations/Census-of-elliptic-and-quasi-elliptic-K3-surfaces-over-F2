@@ -1,0 +1,5 @@
+# Personal scratch space: anything in local/ stays on this machine
+local/
+mini_census_stats.m
+plot_stats.py
+.DS_Store

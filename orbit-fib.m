@@ -31,5 +31,3 @@ end for;
 Flush(F);
 delete F;
 System("gzip -f " cat census_file);
-
-quit;

@@ -109,6 +109,11 @@ function ZetaFunction(E)
     return P2, Z;
 end function;
 
+function ZetaP2(E)
+    return ZetaFunction(E);
+end function;
+
+
 function LFunctionSign(E)
     // The sign of the functional equation of the L-function of E.  Writing
     // L(E, u) = LFunction(E), of degree n, the functional equation is
@@ -144,7 +149,7 @@ function PicardNumber(E)
     //           rho(X over F_q): the multiplicity of the inverse root q itself
     //   Use geo, ar := PicardNumber(E);
     q := #BaseRing(BaseRing(E));
-    P2 := ZetaFunction(E);
+    P2 := ZetaP2(E);
     QX<X> := PolynomialRing(Rationals());
     R := Evaluate(QX ! Coefficients(P2), X/q);          // inverse roots q*z  ->  z
     geometric := &+[ Integers() | Degree(F[1])*F[2] : F in Factorization(R) | IsCyclotomicFactor(F[1]) ];
@@ -156,4 +161,22 @@ function PicardNumber(E)
     return geometric, arithmetic;
 end function;
 
+
+// Håvard wrote the next two functions, so it's artisanal slop (not AI)
+function ArtinTateWrapper(P2)
+    // Returns rho (non-geometric), and Br(X) * #NS(X)_disc
+    _, val := ArtinTateFormula(Parent(P2)!(T^22*Evaluate(P2, 1/T)), 2, 1);
+    return val;
+end function;
+
+// returns height h 
+// NB: return 0 if supersingular (but really, h = infty)
+function Height2(P2)
+    lambda := Slopes(NewtonPolygon(ChangeRing(P2, pAdicRing(2, 500))))[1];
+    try
+	return 1/(1-lambda);
+    catch e
+	return 0;
+    end try;
+end function;
 

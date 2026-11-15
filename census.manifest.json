@@ -1,0 +1,122 @@
+{
+  "release": "complete-f2-2026-11-15",
+  "field_order": 2,
+  "scope": "Smooth, everywhere minimal elliptic K3 fibrations with a chosen zero section, up to base automorphisms",
+  "rows": 1397598,
+  "key_namespace": "Keys decoded by FibrationFromKeyF2 in this repository",
+  "files": [
+    {
+      "path": "census.csv.zip",
+      "compression": "zip",
+      "bytes": 70650464,
+      "sha256": "e96089aec428428c0062d0872bea03ffff575d882a34537c56e27384150d945b",
+      "uncompressed_name": "census.csv",
+      "uncompressed_bytes": 400809620,
+      "uncompressed_sha256": "760d6cdf2aa42b974b841175eab23b95682d3330c9886ee43eda0d2283bc0832",
+      "data_rows": 1397598
+    },
+    {
+      "path": "census-key-map.tsv.gz",
+      "compression": "gzip",
+      "bytes": 8199358,
+      "sha256": "8707a95fcba4d500c8613e9758372a20e2a3acdc76ec5cd72335c14d99abe57b",
+      "uncompressed_name": "key-map.tsv",
+      "uncompressed_bytes": 43674917,
+      "uncompressed_sha256": "95e7ca09392734e14915e696042695088823f69ce46456abe1cce0d12341e486",
+      "data_rows": 1397598
+    }
+  ],
+  "schema": {
+    "csv": {
+      "columns": [
+        "key",
+        "a1",
+        "mw_torsion",
+        "singular_fibres",
+        "L_function",
+        "L_sign",
+        "analytic_rank",
+        "P2",
+        "zeta_sign",
+        "rho_F2",
+        "rho_geom",
+        "artin_height",
+        "br_disc",
+        "pts_F2",
+        "pts_F4",
+        "pts_F8",
+        "pts_F16",
+        "pts_F32"
+      ],
+      "header": true,
+      "header_exactly_matches_saved_census": true,
+      "encoding": "ASCII",
+      "line_ending": "LF",
+      "row_order": "numeric key, decoded by FibrationFromKeyF2",
+      "infinite_height": "inf",
+      "polynomials": "space-separated integer coefficients, constant term first",
+      "fibres": "degree:conductor:tamagawa:Kodaira; sorted by degree, Kodaira, conductor, tamagawa",
+      "torsion": "trivial or Z/n x Z/m"
+    },
+    "key_map": {
+      "columns": [
+        "collaborator_key",
+        "package_key",
+        "source",
+        "unhandled"
+      ],
+      "delimiter": "\t",
+      "header": true,
+      "encoding": "ASCII",
+      "line_ending": "LF",
+      "row_order": "numeric census key",
+      "collaborator_key": "Key decoded by FibrationFromKeyF2 in this repository; used in census.csv",
+      "package_key": "Key for the same orbit in edgarcosta/census_elliptic_fibrations",
+      "source": "existing for an older census row; missing for a previously absent row",
+      "unhandled": "Blank for existing rows; 0 or 1 for missing rows, preserving the flag from the missing-key map supplied by Elise; that input map is not included here",
+      "bijection": true
+    }
+  },
+  "provenance": {
+    "census_repository": "https://github.com/Census-of-elliptic-fibrations/Census-of-elliptic-and-quasi-elliptic-K3-surfaces-over-F2",
+    "census_base_commit": "9d1b3b85b702811da14d0e53a3d768356e998f27",
+    "older_census_archive_sha256": "a896fc522244519440cf0242374d02bcecbf114e0978becf6442ab927e5f221c",
+    "computation": "Saved full F_2 calculation produced by code from edgarcosta/census_elliptic_fibrations, 371 input shards; no arithmetic recomputation for this export",
+    "calculation_source_sha256": "332efa40ac87b5539a9c08b7f777f4d093203559d8fc30d99cb7de7ea756937b",
+    "export_program_sha256": "35016f6990702e832f97e02204f5d24c6755871ee0d9b45e26a902eccdbcd9c4",
+    "validation_program_sha256": "ea3854ced5f165cfa28fd62de282cbdf77a6c6a248870b201acb256efbf61200",
+    "input_hash_inventory_sha256": "393534c22b2939ca454e5637b42275735119987c0f81a6328f6ce7796461308b",
+    "input_hash_inventory_entries": 379,
+    "export_validation_sha256": "74407b2a5a53ee89c3c7a298ef9c2bc3f2b2c695270ed673c0fa9eb6bca4a668",
+    "calculation_repository": "https://github.com/edgarcosta/census_elliptic_fibrations",
+    "export_program_path": "provenance/export.py",
+    "validation_program_path": "provenance/validate.py",
+    "program_inputs": "Programs retain paths to the saved calculation and auxiliary input files, which are not included in this release"
+  },
+  "validation": {
+    "older_rows_identical_in_all_18_fields": 1249569,
+    "missing_rows": 148029,
+    "unhandled_keys_included": 8489,
+    "all_native_records_roundtrip": 1397598,
+    "rows_by_a1": {
+      "0": 173977,
+      "s*t": 523262,
+      "s^2": 524493,
+      "s^2 + s*t + t^2": 175866
+    },
+    "independent_review": "All published F_2 census table rows and k3-f2 site rows agree; all missing keys agree with an independent orbit map; 6292 sampled native records agree field for field",
+    "magma_sample": "500 missing surfaces checked from package keys; a separate sample of 240 missing surfaces checked from census keys decoded by FibrationFromKeyF2, including 40 unhandled keys",
+    "magma_sample_fields": [
+      "L_function",
+      "L_sign",
+      "analytic_rank",
+      "mw_torsion",
+      "singular_fibres"
+    ],
+    "derived_checks": "All 148029 missing rows pass P2-derived field checks, component-factor shape and degree checks; all 1397598 rows pass the fibre Euler-number check"
+  },
+  "limitations": [
+    "Arithmetic was independently recomputed on samples, not on every newly included row.",
+    "Missing rows' P2 factors from reducible fibres rely only on the saved calculation. Structural and derived-field checks do not independently recompute them."
+  ]
+}

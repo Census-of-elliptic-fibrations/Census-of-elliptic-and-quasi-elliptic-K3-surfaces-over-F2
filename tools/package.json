@@ -1,0 +1,9 @@
+{
+  "name": "census-site-tools",
+  "private": true,
+  "type": "module",
+  "description": "Builds the census website's data files from the census CSV",
+  "dependencies": {
+    "@duckdb/node-api": "1.5.5-r.5"
+  }
+}

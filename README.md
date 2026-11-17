@@ -41,6 +41,18 @@ The CSV `key` and the map's existing field `collaborator_key` contain census key
 
 The conversion and validation programs are included in `provenance/export.py` and `provenance/validate.py`; their hashes are recorded in the manifest. They retain paths to the saved calculation and auxiliary input files, which are not included here. Every exported row agrees with its saved result from the census code in `edgarcosta/census_elliptic_fibrations`. Independent arithmetic checks cover samples of missing rows. Their `P2` factors from reducible fibres still rely on that calculation; structural checks do not independently recompute them.
 
+### Website data
+
+`tools/` builds the data files of the census website ([k3-f2](https://github.com/Census-of-elliptic-fibrations/k3-f2)) from `census.csv`:
+
+```
+cd tools && npm install && cd ..
+unzip census.csv.zip
+node tools/build_site_data.mjs census.csv <path to the website>
+```
+
+It checks every row (Euler number 24 by Ogg's formula, $`P_2`$ against $`L`$ and the fibres, the Picard numbers against $`P_2`$), groups the surfaces by zeta function with their LMFDB labels, and stops if anything fails. `tools/census_math.mjs` holds the mathematics it shares with the website: keys, fibres, the cyclotomic and transcendental parts of $`P_2`$, and the LMFDB labels of the `k3_fq_isog` table. If `census.manifest.json` is next to the CSV, the release name is recorded; set `CENSUS_COMMIT` to record a commit other than the checked-out one.
+
 ## List of tasks that have been done
 - Count the 1,397,598 elliptic K3 surfaces over $`\mathbf{F}_2`$ (with a section, up to isomorphism).
 - List the 720 models with $`a_1 = a_3 = 0`$ (up to isomorphism), among which are the quasi-elliptic K3 surfaces.

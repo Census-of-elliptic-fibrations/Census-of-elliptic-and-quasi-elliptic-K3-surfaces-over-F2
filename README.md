@@ -29,6 +29,18 @@ Data:
 - `quasi-elliptic.txt`: the 720 models with $`a_1 = a_3 = 0`$, one per line in the same format, e.g. `[0, 0, 0, 0, s*t^11]`. Which of them are K3 surfaces is not yet checked: the first line, $`[0,0,0,0,0]`$, is $`y^2 = x^3`$ and is not.
 - `quasi_elliptic.m`: the same models as Magma objects. After `load "quasi_elliptic.m";`, `models[i]` is the $`i`$-th model and `curves[i]` its generic fibre $`y^2 = x^3 + a_4x + a_6`$ as a plane curve over $`\mathbf{F}_2(T)`$. That curve is not smooth, so `EllipticCurve` and the functions built on it do not apply.
 
+- `census.csv.zip`: all 1,397,598 elliptic K3 fibrations over $`\mathbf{F}_2`$, in the existing 18-column CSV format, containing `census.csv`.
+- `census-key-map.tsv.gz`: a bijection between the keys decoded by `FibrationFromKeyF2` and those used by [edgarcosta/census_elliptic_fibrations](https://github.com/edgarcosta/census_elliptic_fibrations). Running `gunzip census-key-map.tsv.gz` writes `census-key-map.tsv`.
+- `census.manifest.json`: counts, schemas, provenance, verification limits, byte sizes and SHA-256 hashes of archives and uncompressed files.
+
+All 1,249,569 rows in the published F_2 census table were checked field for field. The added rows include all 8,489 keys marked `unhandled` in the missing-key map supplied by Elise (not included here).
+
+The CSV `key` and the map's existing field `collaborator_key` contain census keys. `FibrationFromKeyF2` decodes them in this repository. The map's `package_key` identifies the same orbit in [edgarcosta/census_elliptic_fibrations](https://github.com/edgarcosta/census_elliptic_fibrations). Rows are sorted by numeric census key. The map's `source` is `existing` for an earlier census row or `missing` for an added row. Its `unhandled` column preserves the supplied 0/1 flag for added rows and is blank for earlier rows. See the manifest for all CSV encodings.
+
+`census.csv.zip` and `census-key-map.tsv.gz` use Git LFS. Install Git LFS, then run `git lfs pull` after cloning to obtain their contents. For a direct download after this release reaches `main`, use the [LFS media URL](https://media.githubusercontent.com/media/Census-of-elliptic-fibrations/Census-of-elliptic-and-quasi-elliptic-K3-surfaces-over-F2/main/census.csv.zip). To pin a version, replace `main` in that URL with the full commit hash. Use `census.manifest.json` from the same commit: check the downloaded archive's byte size and SHA-256 against `bytes` and `sha256` in its `files` entry for `census.csv.zip`. A small text file beginning with `version https://git-lfs.github.com/spec/v1` is an LFS pointer. LFS storage and downloads count against this repository owner's quota, including uploads to a fork.
+
+The conversion and validation programs are included in `provenance/export.py` and `provenance/validate.py`; their hashes are recorded in the manifest. They retain paths to the saved calculation and auxiliary input files, which are not included here. Every exported row agrees with its saved result from the census code in `edgarcosta/census_elliptic_fibrations`. Independent arithmetic checks cover samples of missing rows. Their `P2` factors from reducible fibres still rely on that calculation; structural checks do not independently recompute them.
+
 ## List of tasks that have been done
 - Count the 1,397,598 elliptic K3 surfaces over $`\mathbf{F}_2`$ (with a section, up to isomorphism).
 - List the 720 models with $`a_1 = a_3 = 0`$ (up to isomorphism), among which are the quasi-elliptic K3 surfaces.

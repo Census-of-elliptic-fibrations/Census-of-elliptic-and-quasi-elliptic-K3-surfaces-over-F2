@@ -3,3 +3,4 @@ local/
 mini_census_stats.m
 plot_stats.py
 .DS_Store
+tools/node_modules/

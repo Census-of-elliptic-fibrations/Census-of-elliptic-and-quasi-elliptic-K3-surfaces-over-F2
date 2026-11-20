@@ -1,12 +1,12 @@
 # Census of elliptic and quasi-elliptic K3 surfaces over F2
 
-This Magma code computes the 1,397,598 isomorphism classes of elliptic K3 surfaces with a section over $`\mathbf{F}_2`$ (zero section fixed, automorphisms of the base allowed) in under two minutes. It also lists the 720 Weierstrass models with $`a_1 = a_3 = 0`$, which give the quasi-elliptic fibrations, a phenomenon of characteristic 2 and 3.
+This Magma code computes the 1,397,598 isomorphism classes of elliptic K3 surfaces with a section over $`\mathbf{F}_2`$ (zero section fixed, automorphisms of the base allowed) in under two minutes. It also lists the 720 Weierstrass models with $`a_1 = a_3 = 0`$, of which 680 are quasi-elliptic K3 surfaces. Quasi-elliptic fibrations occur in characteristics 2 and 3.
 
 ## What is counted
 
 Each surface has a Weierstrass model $`y^2 + a_1xy + a_3y = x^3 + a_2x^2 + a_4x + a_6`$ in $`\mathbf{P}(1,1,4,6)`$. Here $`a_i`$ is a binary form of degree $`2i`$ in $`s,t`$ over $`\mathbf{F}_2`$. Models are identified under $`\mathrm{GL}(2,\mathbf{F}_2)`$ acting on $`(s,t)`$ and the changes $`x \mapsto x+q`$, $`y \mapsto y+px+r`$, with $`p,q,r`$ forms of degree 2, 4, 6. A model with $`\Delta \ne 0`$ that is minimal at every place is an elliptic K3 surface.
 
-When $`a_1 = a_3 = 0`$, the substitution $`x \mapsto x + a_2`$ removes $`a_2`$ and leaves $`y^2 = x^3 + a_4x + a_6`$. In characteristic 2 this has $`\Delta = 0`$ identically: the generic fibre over $`\mathbf{F}_2(T)`$ is regular but geometrically a cuspidal cubic, and every fibre is singular. Such a model is not counted among the elliptic surfaces above. When it is a K3 surface, its fibration is quasi-elliptic. The remaining changes of coordinates reduce $`a_4`$ and $`a_6`$ to a normal form without the monomials $`s^8, s^4t^4, t^8`$ in $`a_4`$ and the even monomials $`s^{12-2k}t^{2k}`$ in $`a_6`$, since these can be absorbed by $`x \mapsto x + p^2`$, $`y \mapsto y + px + r`$ (the changes that keep $`a_2 = 0`$).
+When $`a_1 = a_3 = 0`$, the substitution $`x \mapsto x + a_2`$ removes $`a_2`$ and leaves $`y^2 = x^3 + a_4x + a_6`$. In characteristic 2 this has $`\Delta = 0`$ identically: the generic fibre over $`\mathbf{F}_2(T)`$ is regular unless $`a_4`$ and $`a_6`$ are both squares, but geometrically a cuspidal cubic, and every fibre is singular. Such a model is not counted among the elliptic surfaces above. When it is a K3 surface, its fibration is quasi-elliptic. The remaining changes of coordinates reduce $`a_4`$ and $`a_6`$ to a normal form without the monomials $`s^8, s^4t^4, t^8`$ in $`a_4`$ and the even monomials $`s^{12-2k}t^{2k}`$ in $`a_6`$, since these can be absorbed by $`x \mapsto x + p^2`$, $`y \mapsto y + px + r`$ (the changes that keep $`a_2 = 0`$).
 
 
 ## Files
@@ -26,7 +26,7 @@ Data:
 - `data/mini_census.txt`: a random sample of 1000 lines of the census (seed 2026), in the same format, for quick tests.
 - `data/mini_census.m`: the same sample as Magma objects. After `load "data/mini_census.m";`, `models[i]` is the $`i`$-th model in `P<s,t>` and `curves[i]` its generic fibre over `K<T>` $`= \mathbf{F}_2(T)`$, $`T = t/s`$.
 - `data/mini_census_stats.csv`: statistics of the 1000 models of `data/mini_census.txt`, one row per model: the torsion of $`E(\mathbf{F}_2(T))`$, the number of bad places and of singular fibres, the Kodaira types of the singular fibres, the degree of `LFunction(E)` and the sign of its functional equation, the analytic rank, and the Picard numbers over $`\mathbf{F}_2`$ and $`\bar{\mathbf{F}}_2`$.
-- `data/quasi-elliptic.txt`: the 720 models with $`a_1 = a_3 = 0`$, one per line in the same format, e.g. `[0, 0, 0, 0, s*t^11]`. Which of them are K3 surfaces is not yet checked: the first line, $`[0,0,0,0,0]`$, is $`y^2 = x^3`$ and is not.
+- `data/quasi-elliptic.txt`: the 720 models with $`a_1 = a_3 = 0`$, one per line in the same format, e.g. `[0, 0, 0, 0, s*t^11]`. Of these, 680 are quasi-elliptic K3 surfaces; 38 are nonminimal regular cusps and two are nonregular. The crosswalk below records every candidate and its classification.
 - `data/quasi_elliptic.m`: the same models as Magma objects. After `load "data/quasi_elliptic.m";`, `models[i]` is the $`i`$-th model and `curves[i]` its generic fibre $`y^2 = x^3 + a_4x + a_6`$ as a plane curve over $`\mathbf{F}_2(T)`$. That curve is not smooth, so `EllipticCurve` and the functions built on it do not apply.
 
 - `data/census.csv.zip`: all 1,397,598 elliptic K3 fibrations over $`\mathbf{F}_2`$, in the existing 18-column CSV format, containing `census.csv`.
@@ -41,6 +41,69 @@ The CSV `key` and the map's existing field `collaborator_key` contain census key
 
 The conversion and validation programs are included in `provenance/export.py` and `provenance/validate.py`; their hashes are recorded in the manifest. They retain paths to the saved calculation and auxiliary input files, which are not included here. Every exported row agrees with its saved result from the census code in `edgarcosta/census_elliptic_fibrations`. Independent arithmetic checks cover samples of missing rows. Their `P2` factors from reducible fibres still rely on that calculation; structural checks do not independently recompute them.
 
+## Supplementary quasi-elliptic data and angle ranks
+
+The supplementary files give all 680 quasi-elliptic K3 fibrations over F_2
+and the angle ranks of all 180,275 distinct elliptic L-polynomials.
+
+- `data/quasi-elliptic-invariants.csv`: 680 surface rows with 2,321 closed reducible fibres, their Tamagawa numbers, and the product `product_cv`.
+- `data/quasi-elliptic-records.jsonl`: 680 records with explicit equations, fibre places, section certificates, and point counts.
+- `data/quasi-elliptic-key-map.tsv`: all 720 candidates in `data/quasi-elliptic.txt`, including the 40 exclusions.
+- `data/angle-ranks.tsv.gz`: 180,275 rows with columns `L_function`, `angle_rank`, and `multiplicity`, totaling 1,397,598 elliptic surfaces.
+- `data/supplementary.manifest.json`: field definitions, source hashes, file sizes, SHA-256 hashes, and verification limits for these files.
+
+These files are stored in ordinary Git. The angle table is individually
+gzipped; `gzip -dc data/angle-ranks.tsv.gz` reads it without removing the archive.
+Use the manifest from the same commit to check file sizes and SHA-256 hashes.
+Counts exclude CSV and TSV headers; JSONL has one object per line.
+
+The quasi-elliptic CSV and JSONL use package keys from
+[the calculation repository](https://github.com/edgarcosta/census_elliptic_fibrations).
+Each JSONL record gives an equation `y^2=x^3+A(u)*x+B(u)` in `u=s/t`,
+with `A` and `B` as coefficient arrays starting at the constant term.
+The crosswalk's `collaborator_line` starts at 1 in `data/quasi-elliptic.txt`;
+`collaborator_key` is decoded by `FibrationFromKeyF2` here.
+Join its `package_key` to the supplementary surface `key`.
+Excluded candidates have `included=0` and a blank `package_key`.
+The crosswalk identifies equivalent fibrations. All published places and
+section coordinates describe the package equations in `u=s/t`.
+
+The CSV keeps the elliptic table's first 18 column names and order.
+`L_function`, `L_sign`, and `analytic_rank` are empty for these
+quasi-elliptic generic fibres. `P2` uses space-separated integer
+coefficients starting at the constant term, and `artin_height=inf`.
+The appended columns are `artin_invariant`, `geometric_mw_torsion`,
+`ns_discriminant`, `geometric_ns_discriminant`, `brauer_order`, and `product_cv`.
+The two section-group columns use `trivial` or `Z/2 x ... x Z/2`.
+Discriminants are signed; `br_disc` is `brauer_order*abs(ns_discriminant)`.
+
+A CSV fibre entry has the form `degree::tamagawa:Kodaira:place`,
+with entries separated by semicolons. This keeps the elliptic field positions:
+the conductor position is empty, and the place is appended.
+No elliptic conductor or Weierstrass discriminant valuation is assigned.
+A finite place is a monic polynomial in `u` over F_2, without spaces;
+`infinity` denotes `t=0`. JSONL fibres also give `c_v`,
+`place_coefficients` (constant term first; `[]` at infinity), and the original
+`homogeneous_place` in `s,t`.
+Here `c_v=#Phi_v(k_v)` counts residue-field points of the component group
+of the Neron model of the generic smooth locus. The product uses each
+closed place once, without a degree exponent.
+
+To look up an elliptic surface's angle rank, join its `L_function` cell in
+`census.csv` to the identical `L_function` string in `data/angle-ranks.tsv.gz`.
+No polynomial normalization or dictionary identifier is needed.
+Angle rank is the rank modulo roots of unity of the multiplicative group
+generated by normalized Frobenius eigenvalues. Quasi-elliptic surfaces have
+angle rank zero and are outside that elliptic table.
+
+The export checks source hashes, surface joins, fibre associations and
+products, and all 720 crosswalk classifications. It matches every elliptic
+polynomial and multiplicity against the existing census. Saved independent arithmetic
+checks cover 60 F_2 quasi-elliptic surfaces, 137 Tamagawa values on 50 surfaces,
+and 9,458 angle ranks. These are sample checks; the manifest gives their scope.
+Method filenames in the JSONL refer to saved calculation sources, which are
+not bundled here. These files do not include elliptic Mordell-Weil bases or Sha[2] refinements.
+
 ## List of tasks that have been done
 - Count the 1,397,598 elliptic K3 surfaces over $`\mathbf{F}_2`$ (with a section, up to isomorphism).
 - List the 720 models with $`a_1 = a_3 = 0`$ (up to isomorphism), among which are the quasi-elliptic K3 surfaces.
@@ -54,10 +117,10 @@ The conversion and validation programs are included in `provenance/export.py` an
 
 ## Wish list
 These are functions that would be nice to have, but are not yet implemented:
-- [ ] Singular fibres of the quasi-elliptic surfaces over $`\mathbf{F}_2`$.
-- [ ] Artin invariants of the quasi-elliptic surfaces over $`\mathbf{F}_2`$.
+- [x] Reducible fibres of the quasi-elliptic surfaces over $`\mathbf{F}_2`$ (in the supplementary data).
+- [x] Artin invariants of the quasi-elliptic surfaces over $`\mathbf{F}_2`$ (in the supplementary data).
 - [x] Product of the size of the Brauer group and the discriminant of the Néron-Severi lattice of the elliptic surfaces over $`\mathbf{F}_2`$ (through the Artin-Tate formula).
-- [ ] Angle ranks?
+- [x] Elliptic angle ranks, keyed by L-polynomial (in the supplementary data).
 - [ ] Brauer groups of the surfaces.
 - [ ] Mordell-Weil groups of the fibrations.
 - [ ] Néron-Severi lattices of the surfaces.
@@ -227,7 +290,7 @@ Run `magma -b timing_tests.m < /dev/null` to time the built-in functions on the 
 | Quasi-elliptic case | Models |
 | --- | ---: |
 | $`a_1 = a_3 = 0`$, up to isomorphism (`data/quasi-elliptic.txt`) | 720 |
-| Of these, quasi-elliptic K3 surfaces | not yet determined |
+| Of these, quasi-elliptic K3 surfaces | 680 |
 
 ## Checks
 

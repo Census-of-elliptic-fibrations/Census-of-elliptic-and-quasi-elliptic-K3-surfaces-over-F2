@@ -1,0 +1,365 @@
+{
+  "release": "f2-quasi-elliptic-and-angle-ranks",
+  "field_order": 2,
+  "scope": "Complete quasi-elliptic K3 fibrations and elliptic angle ranks over F_2",
+  "rows": {
+    "quasi_elliptic": 680,
+    "closed_reducible_fibres": 2321,
+    "collaborator_candidates": 720,
+    "elliptic_L_polynomials": 180275,
+    "elliptic_surfaces": 1397598
+  },
+  "files": [
+    {
+      "path": "data/quasi-elliptic-invariants.csv",
+      "compression": "none",
+      "bytes": 188588,
+      "sha256": "2694216125cb0a1f73ff5bfefad6a838a4c9cff366de128bad86de1e11d36c81",
+      "data_rows": 680
+    },
+    {
+      "path": "data/quasi-elliptic-records.jsonl",
+      "compression": "none",
+      "bytes": 2823182,
+      "sha256": "9b1ebbee654543353ce6ca0d5f8782abfb0bf40be85113ef5f379c3fe25222f5",
+      "data_rows": 680
+    },
+    {
+      "path": "data/quasi-elliptic-key-map.tsv",
+      "compression": "none",
+      "bytes": 39024,
+      "sha256": "322caf2c5df67bb68d872dd25a6c1540aec2951bad2b72ef4f1b99003a701763",
+      "data_rows": 720
+    },
+    {
+      "path": "data/angle-ranks.tsv.gz",
+      "compression": "gzip",
+      "bytes": 1672107,
+      "sha256": "08104aa9fb30989beb81dafe8bda960fcb85d9fd91d87b8175ebeed0ef656dec",
+      "uncompressed_name": "angle-ranks.tsv",
+      "uncompressed_bytes": 14588241,
+      "uncompressed_sha256": "d381077eb38124e6d89433eef9d06ef3dcacf0e8792ba35709b16a078bebba17",
+      "data_rows": 180275
+    }
+  ],
+  "schema": {
+    "common": {
+      "encoding": "ASCII",
+      "line_ending": "LF",
+      "polynomials": "Integer coefficients, constant term first",
+      "equation": "y^2 = x^3 + A(u)*x + B(u), u=s/t; infinity is t=0",
+      "key_namespace": "Quasi-elliptic table and record keys are package keys in edgarcosta/census_elliptic_fibrations",
+      "elliptic_key_namespace": "The existing census.csv uses collaborator keys; it is unchanged"
+    },
+    "quasi_csv": {
+      "columns": [
+        "key",
+        "a1",
+        "mw_torsion",
+        "singular_fibres",
+        "L_function",
+        "L_sign",
+        "analytic_rank",
+        "P2",
+        "zeta_sign",
+        "rho_F2",
+        "rho_geom",
+        "artin_height",
+        "br_disc",
+        "pts_F2",
+        "pts_F4",
+        "pts_F8",
+        "pts_F16",
+        "pts_F32",
+        "artin_invariant",
+        "geometric_mw_torsion",
+        "ns_discriminant",
+        "geometric_ns_discriminant",
+        "brauer_order",
+        "product_cv"
+      ],
+      "delimiter": ",",
+      "header": true,
+      "row_order": "numeric package key",
+      "shared_fields": "The first 18 columns follow data/census.manifest.json in order and encoding, subject to the exceptions below",
+      "blank_fields": [
+        "L_function",
+        "L_sign",
+        "analytic_rank"
+      ],
+      "blank_meaning": "Not applicable: the generic fibre is quasi-elliptic",
+      "fibres": "degree:conductor:tamagawa:Kodaira:place, separated by semicolons; conductor is empty",
+      "fibre_order": "degree, Kodaira, tamagawa, place",
+      "place": "Monic polynomial in u over F_2, without spaces; infinity is the literal infinity",
+      "conductor": "No elliptic conductor or discriminant valuation is assigned",
+      "infinite_height": "inf",
+      "artin_invariant": "sigma, with geometric NS discriminant -2^(2*sigma)",
+      "geometric_mw_torsion": "Geometric finite section group, trivial or Z/2 x ... x Z/2",
+      "ns_discriminant": "Signed discriminant of NS over F_2",
+      "geometric_ns_discriminant": "Signed discriminant of geometric NS",
+      "brauer_order": "Order of the arithmetic Brauer group over F_2",
+      "product_cv": "Product of c_v over closed reducible places once, without degree exponents",
+      "c_v": "Number of residue-field points of the component group of the Neron model of the generic smooth locus"
+    },
+    "quasi_jsonl": {
+      "header": false,
+      "row_order": "numeric package key",
+      "fields": {
+        "p": "Characteristic and field order, always 2",
+        "key": "Package key as a decimal string",
+        "equation": "Explicit package equation over F_2(u), in the chart u=s/t",
+        "A": "Coefficients of A(u) in F_2, constant term first",
+        "B": "Coefficients of B(u) in F_2, constant term first",
+        "section_bound": "Bound on intersection of a section with the zero section used for exhaustive enumeration",
+        "fibres": "Closed reducible fibre records; see fibre_fields",
+        "geometric_sections": "Number of geometric sections, including zero",
+        "rational_sections": "Number of sections over F_2(u), including zero",
+        "sigma": "Artin invariant",
+        "splitting_degree": "Common component splitting extension degree",
+        "quotient_dimension": "Dimension of the radical section-coordinate algebra over F_2; counts geometric sections",
+        "groebner_basis": "Radical section-ideal Groebner basis in c0,c1,... over F_2",
+        "rational_points": "Nonzero rational sections as [x(u),y(u)] strings; the zero section is omitted",
+        "cpu_seconds": "Saved section-computation CPU seconds",
+        "configuration": "Geometric root types and their multiplicities",
+        "trivial_lattice": "Hyperbolic plane, geometric root lattices, rank and signed discriminant",
+        "geometric_ns_discriminant": "Signed geometric NS discriminant",
+        "rational_trivial_discriminant": "Signed Frobenius-fixed trivial lattice discriminant",
+        "rational_ns_discriminant": "Signed NS discriminant over F_2",
+        "brauer_order": "Arithmetic Brauer group order",
+        "br_disc": "Brauer order times absolute NS discriminant over F_2",
+        "rho": "Picard number over F_2",
+        "rho_geom": "Geometric Picard number, always 22",
+        "artin_height": "Formal Brauer height, the string infinity",
+        "zeta_sign": "Leading coefficient of P2 divided by 2^22",
+        "frobenius_cycles": "Global component cycles, including the fibre and zero-section classes",
+        "P2": "Degree-22 numerator factor of the surface zeta denominator",
+        "normalized_P2": "P2(T/2)",
+        "ns_characteristic_polynomial": "det(X-Frob) on NS without Tate scaling",
+        "point_counts": "Surface point counts over F_(2^n), n=1,...,5",
+        "section_group": "Invariant factors of the finite rational section group; empty means trivial",
+        "geometric_section_group": "Invariant factors of the finite geometric section group",
+        "section_smith_factors": "Smith factors over F_2[z] of the additive section equations",
+        "section_certificate_variables": "Meaning of section-certificate variables",
+        "section_count_includes_zero": "True: section counts include the zero section",
+        "direct_point_counts": "For n=1,...,5: count, raw weierstrass_count, resolution_correction and blowup_centres",
+        "rational_enumeration_candidates": "Number of rational candidates in the exhaustive search",
+        "method": "Saved source program references for local, sections, point_counts and ns calculations",
+        "checks": "Saved boolean checks named by the property checked",
+        "consistent": "All saved consistency checks passed",
+        "upstream": "Saved crosswalk: upstream_line, upstream_key, package key, kind, minimality and invariants_agree",
+        "zeta_function": "Numerator and denominator_factors for 1/((1-T)*P2(T)*(1-4*T))",
+        "coefficient_order": "Constant term first",
+        "ns_characteristic_polynomial_variable": "Variable and Frobenius scaling convention",
+        "chart": "Affine coordinate u=s/t and infinity t=0",
+        "product_cv": "Product over closed reducible places once, without degree exponents"
+      },
+      "fibre_fields": {
+        "place": "Monic polynomial in u, or infinity",
+        "degree": "Closed-place degree over F_2",
+        "kodaira": "Kodaira type",
+        "cycles": "Root-component Frobenius cycle lengths over the residue field",
+        "disc_exponent": "Exponent of 2 in the geometric root-lattice discriminant; not a Weierstrass discriminant valuation",
+        "multiplicity": "Multiplicity of this place in A*(A derivative)^2+(B derivative)^2, homogenized to degree 20",
+        "root_lattice": "Geometric root-lattice type",
+        "root_discriminant": "Positive root-lattice discriminant",
+        "invariant_root_discriminant": "Positive residue-field Frobenius-fixed root-lattice discriminant",
+        "root_frobenius_orbits": "Orbits on zero-based simple-root indices; central vertex followed by the arms",
+        "homogeneous_place": "Original place polynomial in s,t",
+        "place_coefficients": "Constant-term-first coefficients over F_2; [] means infinity",
+        "c_v": "Residue-field points of the component group of the Neron model of the generic smooth locus"
+      }
+    },
+    "quasi_key_map": {
+      "columns": [
+        "collaborator_line",
+        "collaborator_key",
+        "package_key",
+        "kind",
+        "minimality",
+        "included",
+        "exclusion_reason"
+      ],
+      "delimiter": "\t",
+      "header": true,
+      "row_order": "line number in data/quasi-elliptic.txt, starting at 1",
+      "collaborator_line": "One-based line in the unchanged data/quasi-elliptic.txt",
+      "collaborator_key": "Key decoded by FibrationFromKeyF2 in this repository",
+      "package_key": "Key in the quasi-elliptic CSV and JSONL; blank for excluded candidates",
+      "kind": "regular cusp or nonregular",
+      "minimality": "everywhere minimal or nonminimal somewhere",
+      "included": "1 for a quasi-elliptic K3, otherwise 0",
+      "exclusion_reason": "Blank for included candidates; reason for exclusion otherwise"
+    },
+    "angle_ranks": {
+      "columns": [
+        "L_function",
+        "angle_rank",
+        "multiplicity"
+      ],
+      "delimiter": "\t",
+      "header": true,
+      "row_order": "increasing coefficient count, then integer coefficient tuple",
+      "L_function": "Exact bytes of the L_function cell in census.csv; space-separated integer coefficients, constant term first",
+      "angle_rank": "Rank modulo roots of unity of the group generated by normalized Frobenius eigenvalues",
+      "multiplicity": "Number of elliptic census rows with this L_function",
+      "quasi_elliptic": "Excluded from this table; their angle rank is zero"
+    }
+  },
+  "provenance": {
+    "calculation_repository": "https://github.com/edgarcosta/census_elliptic_fibrations",
+    "quasi_calculation_commit": "0bdf62a78de320e405e7e39b6c74bc7ae5b93d8f",
+    "upstream_base_commit": "9f3e1726492b6fc4e440c1b51416efbc3e3d0a0b",
+    "source_inventory_sha256": "53c2ed582f4c1851bc1b1e62f220a35e156f3acbbc479babcee039fc192ffb6b",
+    "sources": {
+      "quasi-elliptic/results.csv": {
+        "bytes": 1036469,
+        "columns": [
+          "p",
+          "key",
+          "a1",
+          "mw_torsion",
+          "singular_fibres",
+          "L_function",
+          "L_sign",
+          "analytic_rank",
+          "P2",
+          "zeta_sign",
+          "rho_F2",
+          "rho_F3",
+          "rho_geom",
+          "artin_height",
+          "br_disc",
+          "pts_F2",
+          "pts_F4",
+          "pts_F8",
+          "pts_F16",
+          "pts_F32",
+          "pts_F3",
+          "pts_F9",
+          "pts_F27",
+          "pts_F81",
+          "pts_F243",
+          "artin_invariant",
+          "geometric_mw_torsion",
+          "ns_discriminant",
+          "geometric_ns_discriminant",
+          "brauer_order",
+          "consistent"
+        ],
+        "rows": 974,
+        "sha256": "4ecfc64199356b9171df8f6fb3f984748467fec69a2f763f3d102a13e50ef5b2"
+      },
+      "quasi-elliptic/results.jsonl": {
+        "bytes": 3639611,
+        "sha256": "78205cba1a12990024fa3df6ad45243e73f8a11e0b325f2890c714505fed2d37"
+      },
+      "quasi-elliptic/upstream-correspondence.jsonl": {
+        "bytes": 101557,
+        "rows": 720,
+        "sha256": "a3af7e5dde034ed7ba4cc33a4e353363fed2721595163a264b023f38c4faaeb4"
+      },
+      "quasi-tamagawa/cv.csv": {
+        "bytes": 282106,
+        "columns": [
+          "key",
+          "p",
+          "field",
+          "fibres",
+          "product_cv"
+        ],
+        "rows": 974,
+        "sha256": "f56e7075f113f2568cb8db6267f62b475096e864cb7771e48d0a4a03cbd0bdef"
+      },
+      "angle-rank-census/polynomials.tsv": {
+        "bytes": 17246307,
+        "columns": [
+          "id",
+          "key",
+          "surfaces",
+          "coefficients"
+        ],
+        "rows": 180275,
+        "sha256": "c2182e7405726a99aad80e049ee66171f2aac1170ff3053fca400c36cd2c65b5"
+      },
+      "angle-rank-census/full/results.tsv": {
+        "bytes": 4403547,
+        "columns": [
+          "id",
+          "angle_rank",
+          "cpu_seconds",
+          "wall_seconds",
+          "max_factor_degree",
+          "galois_order"
+        ],
+        "rows": 180275,
+        "sha256": "a4c15840fbec9ae5145de207d34292e535d0a8a6956c2588bb7e1c35030a22a8"
+      },
+      "quasi-elliptic/report.md": {
+        "bytes": 15208,
+        "sha256": "2dbaf059f5edf10668645c77d9b31e6c3320bd94fe9a5a381aa27a10d176ef4f"
+      },
+      "verify-quasi/report.md": {
+        "bytes": 7568,
+        "sha256": "ed1039700bbe23945d80aad929cb00f77522f20fbd97576e4c4dd994ce92d120"
+      },
+      "quasi-tamagawa/report.md": {
+        "bytes": 6346,
+        "sha256": "24280a65d89ab3b22ce782e5b595c4441bb9e5e2baf4616198b9f08e46079de2"
+      },
+      "quasi-tamagawa/spot-check.md": {
+        "bytes": 3480,
+        "sha256": "9b32307b52296a0bdc940d16b522c446c0e354d7f6fcaecd37527893027daf98"
+      },
+      "angle-rank-census/review.md": {
+        "bytes": 8915,
+        "sha256": "abc6d38c169ac47ccf011ebe3a0b28fe9395033a5df58aaf14d9ec4f5fa03898"
+      },
+      "collab-data-pr/upstream-readonly/quasi-elliptic.txt": {
+        "bytes": 41778,
+        "rows": 720,
+        "sha256": "dfd707cf2e0ce91c330945ff1593a7aeb48cf36e7912044486195d3e61c7b490"
+      },
+      "f2-export/census.csv": {
+        "bytes": 400809620,
+        "rows": 1397598,
+        "sha256": "760d6cdf2aa42b974b841175eab23b95682d3330c9886ee43eda0d2283bc0832"
+      }
+    },
+    "packaging": "Filtered to F_2; joined saved c_v by key and place; translated homogeneous places to u; joined angle ranks by polynomial",
+    "source_programs": "Method filenames in JSONL refer to the saved quasi-elliptic calculation, not files in this release"
+  },
+  "validation": {
+    "source_hashes_match_inventory": true,
+    "quasi_key_sets_identical": 680,
+    "fibre_values_and_products_match_saved_calculation": 2321,
+    "crosswalk_included": 680,
+    "crosswalk_nonminimal_regular": 38,
+    "crosswalk_nonregular": 2,
+    "angle_unique_polynomials": 180275,
+    "angle_exact_census_coverage": 1397598,
+    "angle_weighted_distribution": {
+      "0": 7922,
+      "1": 32892,
+      "2": 42958,
+      "3": 66298,
+      "4": 83769,
+      "5": 132521,
+      "6": 181608,
+      "7": 189970,
+      "8": 248526,
+      "9": 296550,
+      "10": 114584
+    },
+    "saved_arithmetic_checks": [
+      "Quasi-elliptic direct point counts over the first five extensions agree for all 680 F_2 surfaces.",
+      "Independent equation and section checks cover 60 F_2 surfaces.",
+      "Independent Tamagawa equation checks cover 137 fibres from 50 F_2 surfaces and all 54 observed type/degree/cycle triples.",
+      "Independent angle ranks agree on 9458 polynomials, including all ranks zero and ten; 275 were repeated at 1000 digits."
+    ]
+  },
+  "limitations": [
+    "This export packages saved arithmetic; it does not repeat the full calculations.",
+    "Independent equation and section checks cover samples, not every quasi-elliptic surface.",
+    "The crosswalk identifies equivalent fibrations; it does not transform fibre places or section coordinates to collaborator equations."
+  ]
+}

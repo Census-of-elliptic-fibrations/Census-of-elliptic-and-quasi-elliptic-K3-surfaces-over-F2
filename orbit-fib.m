@@ -8,8 +8,8 @@ start := Cputime();
 prefixes := FibrationOrbitPrefixesF2(R);
 a1_reps := [R|0,s^2,s*t,s^2+s*t+t^2];
 
-// Minimal fibrations are written one per line to census.txt, gzipped at the end
-census_file := "census.txt";
+// Minimal fibrations are written one per line to data/census.txt, gzipped at the end
+census_file := "data/census.txt";
 F := Open(census_file, "w");
 
 for i in [1..#prefixes] do

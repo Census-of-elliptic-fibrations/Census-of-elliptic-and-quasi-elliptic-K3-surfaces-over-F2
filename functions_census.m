@@ -3,7 +3,7 @@
 // Here are where we will program the functions that will output the data that we want to collect for the census of elliptic and quasi-elliptic K3 surfaces over F2.
 
 // Useful existing functions already in the Magma environment, for E the generic fibre
-// over K = F2(T) (e.g. curves[i] from mini_census.m).  Times are means per curve on the
+// over K = F2(T) (e.g. curves[i] from data/mini_census.m).  Times are means per curve on the
 // mini-census (timing_tests.m); they do not apply to the quasi-elliptic models, which
 // are not elliptic curves in Magma's sense.
 //
@@ -45,7 +45,7 @@
 // permutation is fixed by the Kodaira type and the Tamagawa number c_v, which counts
 // the components of multiplicity 1 defined over the residue field.
 //
-// The variable of the zeta function is u, to keep T free for F2(T) in mini_census.m.
+// The variable of the zeta function is u, to keep T free for F2(T) in data/mini_census.m.
 // ---------------------------------------------------------------------------------------
 
 Zu<u> := PolynomialRing(Integers());
@@ -167,7 +167,7 @@ end function;
 
 function ZetaFunction(E)
     // The zeta function of the elliptic surface X with generic fibre E.
-    //   Input:  E, an elliptic curve over F_q(T) (e.g. curves[i] from mini_census.m)
+    //   Input:  E, an elliptic curve over F_q(T) (e.g. curves[i] from data/mini_census.m)
     //   Output: P2, the polynomial det(1 - u Frob | H^2(X)) in Z[u], of degree 22 for a K3
     //           Z,  the zeta function 1/((1 - u) P2(u) (1 - q^2 u)), a rational function in u
     //   Use P2, Z := ZetaFunction(E);  or just  P2 := ZetaFunction(E);
@@ -187,7 +187,7 @@ function LFunctionSign(E)
     // L(E, u) = LFunction(E), of degree n, the functional equation is
     //     L(E, u) = eps * (q u)^n * L(E, 1/(q^2 u)),
     // and eps is the leading coefficient of L(E, u) divided by q^n.
-    //   Input:  E, an elliptic curve over F_q(T) (e.g. curves[i] from mini_census.m)
+    //   Input:  E, an elliptic curve over F_q(T) (e.g. curves[i] from data/mini_census.m)
     //   Output: eps, the integer 1 or -1
     q := #BaseRing(BaseRing(E));
     L := LFunction(E);
@@ -200,7 +200,7 @@ function PicardNumber(E)
     // Picard numbers of the elliptic surface X with generic fibre E, read off from P2 by
     // the Tate conjecture (a theorem for elliptic K3 surfaces, by Artin and
     // Swinnerton-Dyer).
-    //   Input:  E, an elliptic curve over F_q(T) (e.g. curves[i] from mini_census.m)
+    //   Input:  E, an elliptic curve over F_q(T) (e.g. curves[i] from data/mini_census.m)
     //   Output: two integers,
     //           rho(X over the algebraic closure of F_q): the number of inverse roots of P2
     //               of the form q * (root of unity), with multiplicity

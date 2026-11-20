@@ -1,7 +1,7 @@
 // test_zeta_picard.m
 //
 // Checks ZetaFunction and PicardNumber from functions_census.m on the first N curves of
-// mini_census.m, and prints the distribution of the Picard numbers.  Each P2 must
+// data/mini_census.m, and prints the distribution of the Picard numbers.  Each P2 must
 //   - have degree 22 and constant term 1,
 //   - satisfy the functional equation  u^22 P2(1/(q^2 u)) = +- P2(u) / q^22,
 // and the Picard numbers must satisfy 2 <= rho(X) <= rho(X over F2bar) <= 22, with
@@ -11,7 +11,7 @@
 
 N := 100;
 
-load "mini_census.m";
+load "data/mini_census.m";
 load "functions_census.m";
 
 q := 2;

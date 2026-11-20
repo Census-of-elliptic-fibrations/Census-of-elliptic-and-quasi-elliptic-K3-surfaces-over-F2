@@ -1,7 +1,7 @@
 // timing_tests.m
 //
-// Times built-in Magma functions on the models in mini_census.txt, to estimate how long
-// they would take on the whole census.  Each line of mini_census.txt is a model
+// Times built-in Magma functions on the models in data/mini_census.txt, to estimate how long
+// they would take on the whole census.  Each line of data/mini_census.txt is a model
 // [a1, a2, a3, a4, a6] (binary forms in s, t over F2, a2 = 0); each is turned into its
 // generic fibre over F2(T), T = t/s.
 //
@@ -9,7 +9,7 @@
 // and to timing_report.txt.
 
 CENSUS_SIZE := 1397598;
-input_file  := "mini_census.txt";
+input_file  := "data/mini_census.txt";
 report_file := "timing_report.txt";
 
 K<T> := RationalFunctionField(GF(2));

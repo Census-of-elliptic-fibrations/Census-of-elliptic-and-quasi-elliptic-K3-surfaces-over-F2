@@ -6,7 +6,7 @@
   "key_namespace": "Keys decoded by FibrationFromKeyF2 in this repository",
   "files": [
     {
-      "path": "census.csv.zip",
+      "path": "data/census.csv.zip",
       "compression": "zip",
       "bytes": 70650464,
       "sha256": "e96089aec428428c0062d0872bea03ffff575d882a34537c56e27384150d945b",
@@ -16,7 +16,7 @@
       "data_rows": 1397598
     },
     {
-      "path": "census-key-map.tsv.gz",
+      "path": "data/census-key-map.tsv.gz",
       "compression": "gzip",
       "bytes": 8199358,
       "sha256": "8707a95fcba4d500c8613e9758372a20e2a3acdc76ec5cd72335c14d99abe57b",

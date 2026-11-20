@@ -1,18 +1,18 @@
 // run_mini_census.m
 //
-// The census CSV for the 1000 models of mini_census.m: the same columns as run_census.m
+// The census CSV for the 1000 models of data/mini_census.m: the same columns as run_census.m
 // (CensusHeader in functions_census.m), written to mini_census_rows.csv, with failures in
 // mini_census_errors.csv.  Each model gets the key it has in the full census, so its row
 // can be compared with the full census later.
 //
 // Run from the repository root:
 //     magma -b run_mini_census.m < /dev/null
-// About 4 minutes.  For the 10000 models of small_census10k.m, change the line
-// load "mini_census.m" below to load "small_census10k.m" (about 40 minutes).
+// About 4 minutes.  For the 10000 models of data/small_census10k.m, change the line
+// load "data/mini_census.m" below to load "data/small_census10k.m" (about 40 minutes).
 
 load "elliptic_fibration_orbits_f2.m";
 load "functions_census.m";
-load "mini_census.m";
+load "data/mini_census.m";
 
 out_file := "mini_census_rows.csv";
 err_file := "mini_census_errors.csv";
